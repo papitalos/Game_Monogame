@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 
 namespace ProjetoJogo.Models
 {
-    public class Player
+    public class Player : Sprite
     {
         private readonly Trail _trail;
-        public Vector2 _position = new(100, 100);
+        public Texture2D _texture;
+        public Vector2 _position;
         public Vector2 _trailPosition = new (100, 100);
         private readonly float _speed = 180f;
 
@@ -21,8 +22,11 @@ namespace ProjetoJogo.Models
         private readonly AnimationManager anim = new();
 
 
-        public Player()
+        public Player(Texture2D _tex, Vector2 _pos) : base(_tex, _pos)
         {
+
+            _position = _pos;
+            _texture = _tex;
 
             //Carregar texturas
             var playerWalkTexture = Globals.Content.Load<Texture2D>("player_walk");
@@ -52,14 +56,14 @@ namespace ProjetoJogo.Models
             if (InputManager.Moving)
             {
                 _position += Vector2.Normalize(InputManager.Direction) * _speed * Globals.Time;
+                _trailPosition = new Vector2(_position.X + 16, _position.Y + 17);
             }
             
         }
 
         public void Update()
         {
-            _trailPosition = new Vector2(_position.X + 16, _position.Y + 17);
-
+            
             Walk();
             anim.Update(InputManager.Direction);
 
@@ -71,7 +75,6 @@ namespace ProjetoJogo.Models
             _trail.Draw();
             anim.Draw(_position);
 
-       
             
         }
     }

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ProjetoJogo.Managers;
+using ProjetoJogo.Models;
 
 namespace ProjetoJogo
 {
@@ -11,9 +12,11 @@ namespace ProjetoJogo
         private SpriteBatch _spriteBatch;
         private GameManager _gameManager;
 
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
+
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -21,8 +24,11 @@ namespace ProjetoJogo
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            _graphics.PreferredBackBufferWidth = 1024;
-            _graphics.PreferredBackBufferHeight = 768;
+       
+
+            Globals.ScreenHeight = _graphics.PreferredBackBufferHeight;
+            Globals.ScreenWidth = _graphics.PreferredBackBufferWidth;
+
             _graphics.ApplyChanges();
 
             Globals.Content = Content;
@@ -38,6 +44,7 @@ namespace ProjetoJogo
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
             Globals.SpriteBatch = _spriteBatch;
         }
 
@@ -49,6 +56,7 @@ namespace ProjetoJogo
             // TODO: Add your update logic here
 
             Globals.Update(gameTime);
+            
             _gameManager.Update();
 
             base.Update(gameTime);

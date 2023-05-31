@@ -12,26 +12,38 @@ namespace ProjetoJogo.Managers
 {
     public class GameManager
     {
-        private Player player;
 
+
+        private Player player;
+        public Camera camera;
+
+   
         public void Init()
         {
-            player = new Player();
-         
+           
+            camera = new Camera();  
+            player = new Player(Globals.Content.Load<Texture2D>("player_idle"), Globals.startPoint); 
+             
+
         }
 
         public void Update()
         {
+            //Verifica os inputs
             InputManager.Update();
-           
+
             player.Update();
+
+            //Seta pra camera dar update focando no player
+            camera.Follow(player);
+
         }
 
         public void Draw()
         {
+            
+            player.Draw();
 
-           player.Draw();
-           
         }
     }
 }

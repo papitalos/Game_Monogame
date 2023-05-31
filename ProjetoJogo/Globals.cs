@@ -12,8 +12,14 @@ namespace ProjetoJogo
     public static class Globals
     {
         public static float Time { get; set; }
+        public static GameTime gameTime;
         public static ContentManager Content { get; set; }
         public static SpriteBatch SpriteBatch { get; set; }
+
+        public static int ScreenHeight;
+        public static int ScreenWidth;
+
+        public static Vector2 startPoint = new(400,100);
 
 
         //Inicializa direções usadas no codigo
@@ -33,6 +39,7 @@ namespace ProjetoJogo
         public static void Update(GameTime gt)
         {
             Time = (float)gt.ElapsedGameTime.TotalSeconds;
+            gameTime = gt;
         }
     }
 }
