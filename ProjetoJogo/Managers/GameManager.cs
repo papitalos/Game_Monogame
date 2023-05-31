@@ -1,4 +1,7 @@
-﻿using ProjetoJogo.Models;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ProjetoJogo.Models;
+using ProjetoJogo.Models.Rastro;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +13,11 @@ namespace ProjetoJogo.Managers
     public class GameManager
     {
         private Player player;
-     
 
         public void Init()
         {
-           player = new Player();
+            player = new Player();
+         
         }
 
         public void Update()
@@ -26,7 +29,9 @@ namespace ProjetoJogo.Managers
 
         public void Draw()
         {
+
            player.Draw();
+           
         }
     }
 }

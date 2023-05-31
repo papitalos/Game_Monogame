@@ -30,6 +30,8 @@ namespace ProjetoJogo.Managers
                 if (keyboardState.IsKeyDown(Keys.D)) _direction.X++; // Define a direção para direita
                 if (keyboardState.IsKeyDown(Keys.W)) _direction.Y--;
                 if (keyboardState.IsKeyDown(Keys.S)) _direction.Y++;
+
+            
             }
         }
     }

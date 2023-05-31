@@ -11,7 +11,7 @@ namespace ProjetoJogo
 {
     public static class Globals
     {
-        public static float TotalSeconds { get; set; }
+        public static float Time { get; set; }
         public static ContentManager Content { get; set; }
         public static SpriteBatch SpriteBatch { get; set; }
 
@@ -32,7 +32,7 @@ namespace ProjetoJogo
         // Atualiza o valor da propriedade TotalSeconds com base no tempo decorrido desde o último frame
         public static void Update(GameTime gt)
         {
-            TotalSeconds = (float)gt.ElapsedGameTime.TotalSeconds;
+            Time = (float)gt.ElapsedGameTime.TotalSeconds;
         }
     }
 }

@@ -54,7 +54,7 @@ namespace ProjetoJogo.Models
         {
             if (!_active) return; // Se a animação não estiver ativa, retorna sem fazer nada
 
-            _frameTimeLeft -= Globals.TotalSeconds; // Reduz o tempo restante
+            _frameTimeLeft -= Globals.Time; // Reduz o tempo restante
 
             if (_frameTimeLeft <= 0)
             {
