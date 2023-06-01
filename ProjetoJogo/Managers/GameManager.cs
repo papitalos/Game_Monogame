@@ -21,9 +21,10 @@ namespace ProjetoJogo.Managers
         public void Init()
         {
            
-            camera = new Camera();  
-            player = new Player(Globals.Content.Load<Texture2D>("player_idle"), Globals.startPoint); 
-             
+            camera = new Camera();
+            player = new Player(Globals.Content.Load<Texture2D>("player_idle"), Globals.startPoint);
+
+
 
         }
 
@@ -31,10 +32,10 @@ namespace ProjetoJogo.Managers
         {
             //Verifica os inputs
             InputManager.Update();
-
+           
             player.Update();
 
-            //Seta pra camera dar update focando no player
+             //Seta pra camera dar update focando no player
             camera.Follow(player);
 
         }

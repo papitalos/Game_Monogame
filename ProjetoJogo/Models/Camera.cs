@@ -9,15 +9,15 @@ namespace ProjetoJogo.Models
 {
     public class Camera
     {
-        public Matrix Transform { get; set; }
+        public Matrix Transform { get; private set; }
 
-        public void Follow(Sprite target)
+        public void Follow(Player target)
         {
             var offset = Matrix.CreateTranslation(Globals.ScreenWidth / 2, Globals.ScreenHeight / 2, 0);
 
-            var position = Matrix.CreateTranslation(-target.Position.X-(target.Rectangle.Width / 2), -target.Position.Y - (target.Rectangle.Height / 2), 0) * offset; 
+            var position = Matrix.CreateTranslation(-target.Position.X-(target.Rectangle.Width / 2), -target.Position.Y - (target.Rectangle.Height / 2), 0); 
 
-            position = position * offset;
+            Transform  = position *  offset;
 
         }
 

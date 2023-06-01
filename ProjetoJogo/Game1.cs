@@ -25,7 +25,6 @@ namespace ProjetoJogo
         {
             // TODO: Add your initialization logic here
        
-
             Globals.ScreenHeight = _graphics.PreferredBackBufferHeight;
             Globals.ScreenWidth = _graphics.PreferredBackBufferWidth;
 
@@ -35,6 +34,8 @@ namespace ProjetoJogo
 
             _gameManager = new();
             _gameManager.Init();
+
+          
 
             base.Initialize();
         }
@@ -67,7 +68,7 @@ namespace ProjetoJogo
             GraphicsDevice.Clear(Color.Lerp(Color.MediumPurple, Color.Black, 0.75f));
 
             // TODO: Add your drawing code here
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(transformMatrix: _gameManager.camera.Transform);
             _gameManager.Draw();
             _spriteBatch.End();
 

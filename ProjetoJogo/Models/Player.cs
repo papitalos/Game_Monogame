@@ -12,7 +12,7 @@ namespace ProjetoJogo.Models
 {
     public class Player : Sprite
     {
-        private readonly Trail _trail;
+        private readonly Trail trail;
         public Texture2D _texture;
         public Vector2 _position;
         public Vector2 _trailPosition = new (100, 100);
@@ -28,7 +28,7 @@ namespace ProjetoJogo.Models
             _position = _pos;
             _texture = _tex;
 
-            //Carregar texturas
+            //Carregar texturas  de animação
             var playerWalkTexture = Globals.Content.Load<Texture2D>("player_walk");
             var playerIdleTexture = Globals.Content.Load<Texture2D>("player_idle");
 
@@ -47,7 +47,7 @@ namespace ProjetoJogo.Models
 
 
              //Trail do Player
-            _trail = new(Globals.Content.Load<Texture2D>("trail"), _trailPosition);
+            trail = new(Globals.Content.Load<Texture2D>("trail"), _trailPosition);
         }
 
 
@@ -55,6 +55,7 @@ namespace ProjetoJogo.Models
         {
             if (InputManager.Moving)
             {
+                
                 _position += Vector2.Normalize(InputManager.Direction) * _speed * Globals.Time;
                 _trailPosition = new Vector2(_position.X + 16, _position.Y + 17);
             }
@@ -67,15 +68,14 @@ namespace ProjetoJogo.Models
             Walk();
             anim.Update(InputManager.Direction);
 
-            _trail.Update(_trailPosition);
+            trail.Update(_trailPosition);
         }
 
         public void Draw()
         {
-            _trail.Draw();
+            trail.Draw();
             anim.Draw(_position);
-
-            
+  
         }
     }
 }
