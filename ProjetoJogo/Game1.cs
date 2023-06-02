@@ -25,6 +25,9 @@ namespace ProjetoJogo
         {
             // TODO: Add your initialization logic here
        
+            _graphics.PreferredBackBufferWidth = 1600;
+            _graphics.PreferredBackBufferHeight = 900;
+
             Globals.ScreenHeight = _graphics.PreferredBackBufferHeight;
             Globals.ScreenWidth = _graphics.PreferredBackBufferWidth;
 
@@ -45,7 +48,7 @@ namespace ProjetoJogo
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-
+            
             Globals.SpriteBatch = _spriteBatch;
         }
 

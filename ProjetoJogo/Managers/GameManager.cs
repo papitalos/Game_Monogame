@@ -17,14 +17,12 @@ namespace ProjetoJogo.Managers
         private Player player;
         public Camera camera;
 
-   
+
         public void Init()
         {
            
             camera = new Camera();
-            player = new Player(Globals.Content.Load<Texture2D>("player_idle"), Globals.startPoint);
-
-
+            player = new Player();
 
         }
 
@@ -32,17 +30,18 @@ namespace ProjetoJogo.Managers
         {
             //Verifica os inputs
             InputManager.Update();
-           
+            CollisionsManager.Update(player._position);
+
             player.Update();
 
              //Seta pra camera dar update focando no player
-            camera.Follow(player);
+            camera.FollowPlayer(player);
 
         }
 
         public void Draw()
         {
-            
+            CollisionsManager.Draw();
             player.Draw();
 
         }

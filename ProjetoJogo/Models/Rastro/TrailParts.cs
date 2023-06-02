@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoJogo.Models.Rastro
 {
-    public class TrailPart : Sprite
+    public class TrailPart : FixedSprite
     {
         public float Lifespan { get; private set; }
         private readonly float _lifespanMax;

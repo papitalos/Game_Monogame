@@ -10,27 +10,35 @@ using System.Threading.Tasks;
 
 namespace ProjetoJogo.Models
 {
-    public class Player : Sprite
+    public class Player
     {
-        private readonly Trail trail;
+        public Texture2D RectangleTexture; // para debug
         public Texture2D _texture;
         public Vector2 _position;
+
+        public int rectangleWidth, rectangleHeight;
+        public Rectangle Rectangle { get { return new Rectangle((int)_position.X, (int)_position.Y, rectangleWidth, rectangleHeight); } }
+
+        private readonly Trail trail;
         public Vector2 _trailPosition = new (100, 100);
+
         private readonly float _speed = 180f;
 
 
         private readonly AnimationManager anim = new();
 
 
-        public Player(Texture2D _tex, Vector2 _pos) : base(_tex, _pos)
+        public Player()
         {
-
-            _position = _pos;
-            _texture = _tex;
-
-            //Carregar texturas  de animação
+            RectangleTexture = Globals.Content.Load<Texture2D>("square");
+            
+            //Carregar texturas  de animação (s/idle)
             var playerWalkTexture = Globals.Content.Load<Texture2D>("player_walk");
             var playerIdleTexture = Globals.Content.Load<Texture2D>("player_idle");
+            
+
+            rectangleWidth = playerIdleTexture.Width/2;
+            rectangleWidth = playerIdleTexture.Height;
 
             //Animações
             //Walk
@@ -42,8 +50,9 @@ namespace ProjetoJogo.Models
             anim.AddAnimation(Globals.up, new(playerWalkTexture, 4, 4, 0.07f, 4));
             anim.AddAnimation(Globals.back_up, new(playerWalkTexture, 4, 4, 0.07f, 4));
             anim.AddAnimation(Globals.foward_up, new(playerWalkTexture, 4, 4, 0.07f, 4));
+
             //Idle
-            anim.AddAnimation(Globals.stoped, new(playerIdleTexture, 2, 1, 0.4f, 1));
+            anim.AddAnimation(Globals.stoped, new(playerIdleTexture, 2,1, 0.4f, 1));
 
 
              //Trail do Player
@@ -65,14 +74,17 @@ namespace ProjetoJogo.Models
         public void Update()
         {
             
+            
             Walk();
             anim.Update(InputManager.Direction);
-
             trail.Update(_trailPosition);
+
+
         }
 
         public void Draw()
         {
+            Globals.SpriteBatch.Draw(RectangleTexture, _position, Color.Green);
             trail.Draw();
             anim.Draw(_position);
   

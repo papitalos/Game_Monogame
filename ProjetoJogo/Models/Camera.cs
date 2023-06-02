@@ -11,14 +11,14 @@ namespace ProjetoJogo.Models
     {
         public Matrix Transform { get; private set; }
 
-        public void Follow(Player target)
+        public void FollowPlayer(Player target)
         {
             var offset = Matrix.CreateTranslation(Globals.ScreenWidth / 2, Globals.ScreenHeight / 2, 0);
 
-            var position = Matrix.CreateTranslation(-target.Position.X-(target.Rectangle.Width / 2), -target.Position.Y - (target.Rectangle.Height / 2), 0); 
+            var position = Matrix.CreateTranslation(-target._position.X-(target.Rectangle.Width / 2), -target._position.Y - (target.Rectangle.Height / 2), 0);
 
-            Transform  = position *  offset;
-
+            Transform = position*offset;
+         
         }
 
         

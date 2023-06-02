@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoJogo.Models
 {
-    public class Sprite
+    public class FixedSprite
     {
         protected Texture2D texture;
         public Vector2 Position { get; protected set; }
@@ -20,7 +20,7 @@ namespace ProjetoJogo.Models
         public Rectangle Rectangle {get{ return new Rectangle((int)Position.X,(int)Position.Y, texture.Width, texture.Height);}}
 
 
-        public Sprite(Texture2D texture, Vector2 position)
+        public FixedSprite(Texture2D texture, Vector2 position)
         {
             Position = position;
             this.texture = texture;

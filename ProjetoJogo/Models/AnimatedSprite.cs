@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoJogo.Models
 {
-    public class Animation
+    public class AnimatedSprite
     {
         private readonly Texture2D _texture; // Textura que contém os frames da animação
         private readonly List<Rectangle> _sourceRectangles = new(); // Lista de retângulos que representam as regiões dos frames na textura
@@ -18,14 +18,18 @@ namespace ProjetoJogo.Models
         private float _frameTimeLeft; // Tempo restante para exibir o próximo frame
         private bool _active = true; // Indica se a animação está ativa
 
-        public Animation(Texture2D texture, int framesX, int framesY, float frameTime, int row = 1)
+        public int frameWidth;
+        public int frameHeight;
+
+        public AnimatedSprite(Texture2D texture, int framesX, int framesY, float frameTime, int row = 1)
         {
             _texture = texture;
             _frameTime = frameTime;
             _frameTimeLeft = _frameTime;
             _frames = framesX;
-            var frameWidth = _texture.Width / framesX;
-            var frameHeight = _texture.Height / framesY;
+
+            frameWidth = _texture.Width / framesX;
+            frameHeight = _texture.Height / framesY;
 
             // Calcula os retângulos de origem para cada frame da animação
             for (int i = 0; i < _frames; i++)

@@ -10,10 +10,10 @@ namespace ProjetoJogo.Managers
 {
     public class AnimationManager
     {
-        private readonly Dictionary<object, Animation> _anims = new Dictionary<object, Animation>(); // Dicionário para armazenar animações com suas respectivas teclas
+        private readonly Dictionary<object, Models.AnimatedSprite> _anims = new Dictionary<object, Models.AnimatedSprite>(); // Dicionário para armazenar animações com suas respectivas teclas
         private object _lastKey; // Última tecla usada
 
-        public void AddAnimation(object key, Animation animation)
+        public void AddAnimation(object key, Models.AnimatedSprite animation)
         {
             _anims.Add(key, animation); // Adiciona a animação ao dicionário, associando-a à sua tecla
             _lastKey ??= key; // Se _lastKey for nulo, atribui a tecla atual
@@ -21,7 +21,7 @@ namespace ProjetoJogo.Managers
 
         public void Update(object key)
         {
-            if (_anims.TryGetValue(key, out Animation value))
+            if (_anims.TryGetValue(key, out Models.AnimatedSprite value))
             {
                 value.Start(); // Inicia a animação associada à tecla fornecida
                 _anims[key].Update(); // Atualiza a animação associada à tecla fornecida
