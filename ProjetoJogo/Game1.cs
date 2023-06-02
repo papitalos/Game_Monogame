@@ -24,7 +24,9 @@ namespace ProjetoJogo
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-       
+            
+            Globals.GraphicsDeviceManager = _graphics;
+
             _graphics.PreferredBackBufferWidth = 1600;
             _graphics.PreferredBackBufferHeight = 900;
 
@@ -32,7 +34,7 @@ namespace ProjetoJogo
             Globals.ScreenWidth = _graphics.PreferredBackBufferWidth;
 
             _graphics.ApplyChanges();
-
+           
             Globals.Content = Content;
 
             _gameManager = new();

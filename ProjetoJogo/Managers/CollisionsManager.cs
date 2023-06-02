@@ -19,6 +19,31 @@ namespace ProjetoJogo.Managers
         {
             _position = position;
         }
+
+        public static void setRectangleTexture(GraphicsDevice graphics, Texture2D texture)
+        {
+            var colours = new List<Color>();
+
+            for (int y = 0; y < texture.Height; y++)
+            {
+                for (int x = 0; x < texture.Width; x++)
+                {
+                    if (x == 0 || y == 0 || x == texture.Width - 1 || y == texture.Height - 1)
+                    {
+                        colours.Add(new Color(255, 255, 255, 255));
+                    }
+                    else
+                    {
+                        colours.Add(new Color(0, 0, 0, 0));
+                    }
+                }
+            }
+
+            _rectangleTexture = new Texture2D(graphics, texture.Width, texture.Height);
+            _rectangleTexture.SetData<Color>(colours.ToArray());
+
+        }
+
         public static void Draw()
         {
             if (ShowRectangle)

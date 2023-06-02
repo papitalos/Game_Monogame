@@ -14,6 +14,7 @@ namespace ProjetoJogo
         public static float Time { get; set; }
         public static GameTime gameTime;
         public static ContentManager Content { get; set; }
+        public static GraphicsDeviceManager GraphicsDeviceManager { get; set; }
         public static SpriteBatch SpriteBatch { get; set; }
 
         public static int ScreenHeight;

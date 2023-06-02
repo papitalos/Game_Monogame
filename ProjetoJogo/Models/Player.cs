@@ -78,6 +78,7 @@ namespace ProjetoJogo.Models
             Walk();
             anim.Update(InputManager.Direction);
             trail.Update(_trailPosition);
+            CollisionsManager.Update(_position);
 
 
         }
