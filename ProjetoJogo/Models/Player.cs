@@ -78,7 +78,6 @@ namespace ProjetoJogo.Models
             Walk();
             anim.Update(InputManager.Direction);
             trail.Update(_trailPosition);
-            CollisionsManager.Update(_position);
 
 
         }
@@ -88,6 +87,8 @@ namespace ProjetoJogo.Models
             Globals.SpriteBatch.Draw(RectangleTexture, _position, Color.Green);
             trail.Draw();
             anim.Draw(_position);
+
+            CollisionsManager.Draw();
   
         }
     }

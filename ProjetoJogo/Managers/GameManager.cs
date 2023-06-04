@@ -30,7 +30,7 @@ namespace ProjetoJogo.Managers
         {
             //Verifica os inputs
             InputManager.Update();
-            CollisionsManager.Update(player._position);
+           
 
             player.Update();
 
@@ -41,7 +41,6 @@ namespace ProjetoJogo.Managers
 
         public void Draw()
         {
-            CollisionsManager.Draw();
             player.Draw();
 
         }

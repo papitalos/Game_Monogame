@@ -15,9 +15,9 @@ namespace ProjetoJogo.Managers
         public static Vector2 _position;
         public static bool ShowRectangle { get; set; }
 
-        public static void Update(Vector2 position)
+        public static void Update(Texture2D texture)
         {
-            _position = position;
+            
         }
 
         public static void setRectangleTexture(GraphicsDevice graphics, Texture2D texture)
@@ -50,6 +50,7 @@ namespace ProjetoJogo.Managers
             {
                 if(_rectangleTexture != null) 
                 {
+                    setRectangleTexture(Globals.GraphicsDeviceManager.GraphicsDevice, texture);
                     Globals.SpriteBatch.Draw(_rectangleTexture, _position, Color.Green);
 
                 }
