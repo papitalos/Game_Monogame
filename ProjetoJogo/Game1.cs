@@ -10,9 +10,10 @@ namespace ProjetoJogo
     {
         public static Game1 Instance { get; private set; }
         private GraphicsDeviceManager _graphics;
-        public SpriteBatch _spriteBatch;
+        public SpriteBatch _spriteBatchUM;
+        public SpriteBatch _spriteBatchDOIS;
         private GameManager _gameManager;
-        public Texture2D background;
+   
 
         public Game1()
         {
@@ -47,11 +48,12 @@ namespace ProjetoJogo
 
         protected override void LoadContent()
         {
-            background = Content.Load<Texture2D>("mushroom");
 
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-            
-            Globals.SpriteBatch = _spriteBatch;
+            _spriteBatchUM = new SpriteBatch(GraphicsDevice);
+            _spriteBatchDOIS = new SpriteBatch(GraphicsDevice);
+
+            Globals.SpriteBatchUM = _spriteBatchUM;
+            Globals.SpriteBatchDOIS = _spriteBatchDOIS;
         }
 
       
@@ -74,19 +76,17 @@ namespace ProjetoJogo
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-          
-                  
-               
-
-              
+      
             GraphicsDevice.Clear(Color.Lerp(Color.MediumPurple, Color.Black, 0.75f));
 
             // TODO: Add your drawing code here
-            _spriteBatch.Begin(transformMatrix: _gameManager.camera.Transform);
-            _spriteBatch.Draw(background, new Rectangle(0,0,1000,1000), Color.White);
+            _spriteBatchUM.Begin(transformMatrix: _gameManager.camera.Transform);
+            _spriteBatchDOIS.Begin();
+
             _gameManager.Draw();
-            _spriteBatch.End();
+
+            _spriteBatchDOIS.End();
+            _spriteBatchUM.End();
                 
            
 

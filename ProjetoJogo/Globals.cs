@@ -15,7 +15,8 @@ namespace ProjetoJogo
         public static GameTime gameTime;
         public static ContentManager Content { get; set; }
       
-        public static SpriteBatch SpriteBatch { get; set; }
+        public static SpriteBatch SpriteBatchUM { get; set; }
+        public static SpriteBatch SpriteBatchDOIS { get; set; }
 
         public static int ScreenHeight;
         public static int ScreenWidth;

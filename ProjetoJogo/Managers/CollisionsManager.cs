@@ -48,7 +48,7 @@ namespace ProjetoJogo.Managers
                 if(_rectangleTexture != null) 
                 {
                     setRectangleTexture(Game1.Instance.GraphicsDevice, texture);
-                    Globals.SpriteBatch.Draw(_rectangleTexture, _position, Color.Green);
+                    Globals.SpriteBatchUM.Draw(_rectangleTexture, _position, Color.Green);
 
                 }
             }

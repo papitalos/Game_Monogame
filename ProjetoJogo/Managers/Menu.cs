@@ -17,20 +17,19 @@ namespace ProjetoJogo.Managers
     {
         public bool once = false;
         public Texture2D _backgroundTexture;
-        Vector2 _backgroundPosition;
-        Vector2 _backgroundScale = new Vector2(0.9f, 0.6f);
+        
+        Vector2 _backgroundScale = new (0.82f, 0.55f);
         SpriteFont font;
-        private int selectedOption;
+       
         private const float fontSize = 32f;
 
         public Menu()
         {
-            this._backgroundTexture = Globals.Content.Load<Texture2D>("mushroom");
+            
+            _backgroundTexture = Globals.Content.Load<Texture2D>("mushroom");  
 
-            _backgroundPosition = new(100, 100);
             font = Globals.Content.Load<SpriteFont>("default");
-
-            selectedOption = 0;
+            
         }
 
         public void Update()
@@ -58,11 +57,10 @@ namespace ProjetoJogo.Managers
        
         public void Draw()
         {
-            if (!once)
-            {
-                once = true;
-                ScaleTexture(_backgroundTexture);
-            }
+
+            
+            ScaleTexture(_backgroundTexture);
+            
             
             // Define a escala da fonte
             float scale = fontSize / font.MeasureString("A").Y;
@@ -75,15 +73,15 @@ namespace ProjetoJogo.Managers
             Debug.WriteLine("desenhando MENU");
             // Desenha a opção "Start" com a fonte grande
             if (InputManager.selectedOption == 1)
-                Globals.SpriteBatch.DrawString(font, "Start", startOptionPosition, Color.Yellow, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                Globals.SpriteBatchDOIS.DrawString(font, "Start", startOptionPosition, Color.Yellow, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
             else
-                Globals.SpriteBatch.DrawString(font, "Start", startOptionPosition, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                Globals.SpriteBatchDOIS.DrawString(font, "Start", startOptionPosition, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
 
             // Desenha a opção "Quit" com a fonte grande
             if (InputManager.selectedOption == 2)
-                Globals.SpriteBatch.DrawString(font, "Quit", quitOptionPosition, Color.Yellow, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                Globals.SpriteBatchDOIS.DrawString(font, "Quit", quitOptionPosition, Color.Yellow, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
             else
-                Globals.SpriteBatch.DrawString(font, "Quit", quitOptionPosition, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                Globals.SpriteBatchDOIS.DrawString(font, "Quit", quitOptionPosition, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
 
         }
         private void ScaleTexture(Texture2D source)
@@ -97,8 +95,8 @@ namespace ProjetoJogo.Managers
             Instance.GraphicsDevice.SetRenderTarget(result);
             Instance.GraphicsDevice.Clear(Color.Transparent);
 
-
-            Globals.SpriteBatch.Draw(source, new Rectangle(0, 0, newWidth, newHeight), Color.White);
+            Globals.SpriteBatchDOIS.Draw(source, new Rectangle(0, 0, newWidth, newHeight), Color.White);
+            
 
             Instance.GraphicsDevice.SetRenderTarget(null);
             

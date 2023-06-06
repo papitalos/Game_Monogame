@@ -84,11 +84,11 @@ namespace ProjetoJogo.Models
 
         public void Draw()
         {
-            Globals.SpriteBatch.Draw(RectangleTexture, _position, Color.Green);
+           
             trail.Draw();
             anim.Draw(_position);
 
-            CollisionsManager.Draw(_texture);
+           
   
         }
     }

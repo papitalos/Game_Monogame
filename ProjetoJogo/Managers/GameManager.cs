@@ -29,7 +29,7 @@ namespace ProjetoJogo.Managers
 
         public void Init()
         {
-
+            //Estado inicial
             state = GameState.Menu;
 
             menu = new Menu();
@@ -43,7 +43,7 @@ namespace ProjetoJogo.Managers
             //Verifica os inputs
             InputManager.Update();
             
-            if (state == GameState.Playing)
+            if (state == GameState.Menu)
             {
                 menu.Update();
             }
@@ -62,9 +62,7 @@ namespace ProjetoJogo.Managers
         {
             if (state == GameState.Menu)
             {
-
                 menu.Draw();
-
             }
             if (state == GameState.Playing)
             {

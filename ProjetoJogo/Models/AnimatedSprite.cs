@@ -70,7 +70,7 @@ namespace ProjetoJogo.Models
         public void Draw(Vector2 pos)
         {
             // Desenha o frame atual na posição especificada
-            Globals.SpriteBatch.Draw(_texture, pos, _sourceRectangles[_frame], Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, 1);
+            Globals.SpriteBatchUM.Draw(_texture, pos, _sourceRectangles[_frame], Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, 1);
         }
     }
 }

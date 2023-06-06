@@ -30,7 +30,7 @@ namespace ProjetoJogo.Models
 
         public virtual void Draw()
         {
-            Globals.SpriteBatch.Draw(texture, Position, null, color, rotation, _origin, 1f, SpriteEffects.None, 0f);
+            Globals.SpriteBatchUM.Draw(texture, Position, null, color, rotation, _origin, 1f, SpriteEffects.None, 0f);
 
         }
 

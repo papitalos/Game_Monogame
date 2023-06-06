@@ -17,7 +17,7 @@ namespace ProjetoJogo.Managers
         public static bool Moving => _direction != Vector2.Zero; // Propriedade para verificar se há movimento
 
    
-        public static int selectedOption;
+        public static int selectedOption = 1;
         public static bool keyPressedMenu = false; // verifica se nao pertence a nenhuma das opções
 
 
