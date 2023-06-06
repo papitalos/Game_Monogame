@@ -4,23 +4,35 @@ using ProjetoJogo.Models;
 using ProjetoJogo.Models.Rastro;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ProjetoJogo.Game1;
 
 namespace ProjetoJogo.Managers
 {
     public class GameManager
     {
 
-
+        public Menu menu;
         private Player player;
         public Camera camera;
+        public static GameState state;
 
+        public enum GameState
+        {
+            Menu,
+            Playing,
+            Quitting
+        }
 
         public void Init()
         {
-           
+
+            state = GameState.Menu;
+
+            menu = new Menu();
             camera = new Camera();
             player = new Player();
 
@@ -30,18 +42,34 @@ namespace ProjetoJogo.Managers
         {
             //Verifica os inputs
             InputManager.Update();
-           
+            
+            if (state == GameState.Playing)
+            {
+                menu.Update();
+            }
+            if (state == GameState.Playing)
+            {
+                Debug.WriteLine("PlayerUPDATE");
+                player.Update();
 
-            player.Update();
-
-             //Seta pra camera dar update focando no player
-            camera.FollowPlayer(player);
+                //Seta pra camera dar update focando no player
+                camera.FollowPlayer(player);
+            }
 
         }
 
         public void Draw()
         {
-            player.Draw();
+            if (state == GameState.Menu)
+            {
+
+                menu.Draw();
+
+            }
+            if (state == GameState.Playing)
+            {
+                player.Draw();
+            }
 
         }
     }

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,9 @@ namespace ProjetoJogo.Managers
 
         public static bool Moving => _direction != Vector2.Zero; // Propriedade para verificar se há movimento
 
-
+   
+        public static int selectedOption;
+        public static bool keyPressedMenu = false; // verifica se nao pertence a nenhuma das opções
 
 
         public static void Update()
@@ -26,12 +29,24 @@ namespace ProjetoJogo.Managers
 
             if (keyboardState.GetPressedKeyCount() > 0) // Verifica se alguma tecla está pressionada
             {
-                if (keyboardState.IsKeyDown(Keys.A)) _direction.X--; // Define a direção para esquerda
-                if (keyboardState.IsKeyDown(Keys.D)) _direction.X++; // Define a direção para direita
-                if (keyboardState.IsKeyDown(Keys.W)) _direction.Y--;
-                if (keyboardState.IsKeyDown(Keys.S)) _direction.Y++;
+                if (GameManager.state == GameManager.GameState.Playing)
+                {
+                    Debug.WriteLine("InputKEYSWALKING");
+                    if (keyboardState.IsKeyDown(Keys.W)) _direction.Y--;
+                    if (keyboardState.IsKeyDown(Keys.A)) _direction.X--; 
+                    if (keyboardState.IsKeyDown(Keys.S)) _direction.Y++;
+                    if (keyboardState.IsKeyDown(Keys.D)) _direction.X++; 
+                    
+                }
 
-            
+                if(GameManager.state == GameManager.GameState.Menu)
+                {
+                    Debug.WriteLine("InputKEYSMENU");
+                    if (keyboardState.IsKeyDown(Keys.Enter)) keyPressedMenu = true; // Enter - confirma pra jogar
+                    if (keyboardState.IsKeyDown(Keys.Up)) selectedOption = 1; // 1 - playing
+                    if (keyboardState.IsKeyDown(Keys.Down)) selectedOption = 2; // 2 - exit 
+                }
+               
             }
         }
     }

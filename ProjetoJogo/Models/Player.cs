@@ -37,7 +37,7 @@ namespace ProjetoJogo.Models
             var playerIdleTexture = Globals.Content.Load<Texture2D>("player_idle");
             
 
-            rectangleWidth = playerIdleTexture.Width/2;
+            rectangleWidth = playerIdleTexture.Width;
             rectangleWidth = playerIdleTexture.Height;
 
             //Animações
@@ -88,7 +88,7 @@ namespace ProjetoJogo.Models
             trail.Draw();
             anim.Draw(_position);
 
-            CollisionsManager.Draw();
+            CollisionsManager.Draw(_texture);
   
         }
     }

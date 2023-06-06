@@ -9,65 +9,61 @@ using System.Reflection.Metadata;
 using Microsoft.Xna.Framework.Input;
 using static ProjetoJogo.Game1;
 using System.Diagnostics;
+using System.Threading.Tasks.Dataflow;
 
 namespace ProjetoJogo.Managers
 {
     public class Menu
     {
-        private List<string> options;
+        public bool once = false;
+        public Texture2D _backgroundTexture;
+        Vector2 _backgroundPosition;
+        Vector2 _backgroundScale = new Vector2(0.9f, 0.6f);
+        SpriteFont font;
         private int selectedOption;
         private const float fontSize = 32f;
 
         public Menu()
         {
-            options = new List<string>
-        {
-            "Start",
-            "Quit"
-        };
+            this._backgroundTexture = Globals.Content.Load<Texture2D>("mushroom");
+
+            _backgroundPosition = new(100, 100);
+            font = Globals.Content.Load<SpriteFont>("default");
 
             selectedOption = 0;
         }
 
-        public void Update(GameState gameState)
+        public void Update()
         {
-            KeyboardState keyboardState = Keyboard.GetState();
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            if (InputManager.keyPressedMenu)
             {
-                // Seleciona a opção anterior
-                selectedOption--;
-                if (selectedOption < 0)
-                    selectedOption = 1;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                // Seleciona a próxima opção
-                selectedOption++;
-                if (selectedOption > 1)
-                    selectedOption = 0;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-            {
-                Debug.WriteLine("jogando");
-                // Inicia o jogo se a opção "Start" estiver selecionada
-                if (selectedOption == 0)
+                switch (InputManager.selectedOption)
                 {
-                    gameState = GameState.Playing;
-                    Debug.WriteLine("jogando");
+              
+                    case 1://Jogar
+                        GameManager.state = GameManager.GameState.Playing;
+                        Debug.WriteLine("Iniciando game");
+                                            
+                        break;
+                    case 2://Sair
+                        GameManager.state = GameManager.GameState.Quitting;
+                        Debug.WriteLine("Saindo game");
+                        Instance.Exit();
+
+                        break;
                 }
-                else if (selectedOption == 1)
-                    gameState = GameState.Quitting;
             }
+                
         }
-
-        public void Draw(SpriteBatch spriteBatch, SpriteFont font , Texture2D backgroundTexture, Vector2 backgroundPosition, Vector2 backgroundScale)
+       
+        public void Draw()
         {
-            spriteBatch.Begin();
-
-            // Desenha a imagem de fundo
-            spriteBatch.Draw(backgroundTexture, backgroundPosition, null, Color.White, 0f, Vector2.Zero, backgroundScale, SpriteEffects.None, 0f);
-
+            if (!once)
+            {
+                once = true;
+                ScaleTexture(_backgroundTexture);
+            }
+            
             // Define a escala da fonte
             float scale = fontSize / font.MeasureString("A").Y;
 
@@ -76,19 +72,37 @@ namespace ProjetoJogo.Managers
             Vector2 startOptionPosition = new Vector2(100, 200);
             Vector2 quitOptionPosition = new Vector2(100, 250);
 
+            Debug.WriteLine("desenhando MENU");
             // Desenha a opção "Start" com a fonte grande
-            if (selectedOption == 0)
-                spriteBatch.DrawString(font, "Start", startOptionPosition, Color.Yellow, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            if (InputManager.selectedOption == 1)
+                Globals.SpriteBatch.DrawString(font, "Start", startOptionPosition, Color.Yellow, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
             else
-                spriteBatch.DrawString(font, "Start", startOptionPosition, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                Globals.SpriteBatch.DrawString(font, "Start", startOptionPosition, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
 
             // Desenha a opção "Quit" com a fonte grande
-            if (selectedOption == 1)
-                spriteBatch.DrawString(font, "Quit", quitOptionPosition, Color.Yellow, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            if (InputManager.selectedOption == 2)
+                Globals.SpriteBatch.DrawString(font, "Quit", quitOptionPosition, Color.Yellow, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
             else
-                spriteBatch.DrawString(font, "Quit", quitOptionPosition, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                Globals.SpriteBatch.DrawString(font, "Quit", quitOptionPosition, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
 
-            spriteBatch.End();
+        }
+        private void ScaleTexture(Texture2D source)
+        {
+
+            int newWidth = (int)(source.Width* _backgroundScale.X);
+            int newHeight = (int)(source.Height * _backgroundScale.Y);
+            
+
+            RenderTarget2D result = new RenderTarget2D(Instance.GraphicsDevice, newWidth, newHeight);
+            Instance.GraphicsDevice.SetRenderTarget(result);
+            Instance.GraphicsDevice.Clear(Color.Transparent);
+
+
+            Globals.SpriteBatch.Draw(source, new Rectangle(0, 0, newWidth, newHeight), Color.White);
+
+            Instance.GraphicsDevice.SetRenderTarget(null);
+            
+           
         }
     }
 
