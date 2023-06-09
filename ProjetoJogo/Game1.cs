@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ProjetoJogo.Managers;
 using ProjetoJogo.Models;
+using ProjetoJogo.Models.Jogador;
 
 namespace ProjetoJogo
 {
@@ -80,7 +81,7 @@ namespace ProjetoJogo
             GraphicsDevice.Clear(Color.Lerp(Color.MediumPurple, Color.Black, 0.75f));
 
             // TODO: Add your drawing code here
-            _spriteBatchUM.Begin(transformMatrix: _gameManager.camera.Transform);
+            _spriteBatchUM.Begin(transformMatrix: Camera.Transform);
             _spriteBatchDOIS.Begin();
 
             _gameManager.Draw();

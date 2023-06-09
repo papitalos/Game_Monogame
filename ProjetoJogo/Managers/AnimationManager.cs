@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using ProjetoJogo.Models;
+using ProjetoJogo.Models.Base;
+using ProjetoJogo.Models.Jogador;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,33 +11,33 @@ namespace ProjetoJogo.Managers
 {
     public class AnimationManager
     {
-        private readonly Dictionary<object, Models.AnimatedSprite> _anims = new Dictionary<object, Models.AnimatedSprite>(); // Dicionário para armazenar animações com suas respectivas teclas
-        private object _lastKey; // Última tecla usada
+        private readonly Dictionary<object, Animation> _anims = new();
+        private object _lastKey;
 
-        public void AddAnimation(object key, Models.AnimatedSprite animation)
+        public void AddAnimation(object key, Animation animation)
         {
-            _anims.Add(key, animation); // Adiciona a animação ao dicionário, associando-a à sua tecla
-            _lastKey ??= key; // Se _lastKey for nulo, atribui a tecla atual
+            _anims.Add(key, animation);
+            _lastKey ??= key;
         }
 
         public void Update(object key)
         {
-            if (_anims.TryGetValue(key, out Models.AnimatedSprite value))
+            if (_anims.TryGetValue(key, out Animation value))
             {
-                value.Start(); // Inicia a animação associada à tecla fornecida
-                _anims[key].Update(); // Atualiza a animação associada à tecla fornecida
-                _lastKey = key; // Atualiza _lastKey com a tecla fornecida
+                value.Start();
+                _anims[key].Update();
+                _lastKey = key;
             }
             else
             {
-                _anims[_lastKey].Stop(); // Interrompe a animação associada à última tecla usada
-                _anims[_lastKey].Reset(); // Reinicia a animação associada à última tecla usada
+                _anims[_lastKey].Stop();
+                _anims[_lastKey].Reset();
             }
         }
 
         public void Draw(Vector2 position)
         {
-            _anims[_lastKey].Draw(position); // Desenha a animação associada à última tecla usada na posição especificada
+            _anims[_lastKey].Draw(position);
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ProjetoJogo.Models;
+using ProjetoJogo.Models.Jogador;
 using ProjetoJogo.Models.Rastro;
+using ProjetoJogo.Models.UI;
+using ProjetoJogo.Models.Weapons;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,9 +17,11 @@ namespace ProjetoJogo.Managers
     public class GameManager
     {
 
-        public Menu menu;
-        private Player player;
-        public Camera camera;
+        public Menu menu; 
+        public PlayerData playerData;
+        public Player player;
+
+
         public static GameState state;
 
         public enum GameState
@@ -32,14 +36,32 @@ namespace ProjetoJogo.Managers
             //Estado inicial
             state = GameState.Menu;
 
+
+         
+
+            var bullet_tex = Globals.Content.Load<Texture2D>("bullet");
+          
+
+            BulletManager.Init(bullet_tex);
+            UIManager.Init(bullet_tex);
+
+            
             menu = new Menu();
-            camera = new Camera();
-            player = new Player();
+            playerData = new PlayerData();
+            player = new Player(playerData);
+
+            
+
 
         }
-
+        public void Restart()
+        {
+            BulletManager.Reset();
+            player.Reset();
+        }
         public void Update()
         {
+            if (playerData.Dead) Restart();
             //Verifica os inputs
             InputManager.Update();
             
@@ -49,11 +71,11 @@ namespace ProjetoJogo.Managers
             }
             if (state == GameState.Playing)
             {
-                Debug.WriteLine("PlayerUPDATE");
                 player.Update();
+                Camera.Follow(player);
+               
 
-                //Seta pra camera dar update focando no player
-                camera.FollowPlayer(player);
+                BulletManager.Update();
             }
 
         }
@@ -66,7 +88,10 @@ namespace ProjetoJogo.Managers
             }
             if (state == GameState.Playing)
             {
+                BulletManager.Draw();
                 player.Draw();
+                UIManager.Draw(playerData);
+
             }
 
         }

@@ -15,13 +15,13 @@ namespace ProjetoJogo
         public static GameTime gameTime;
         public static ContentManager Content { get; set; }
       
-        public static SpriteBatch SpriteBatchUM { get; set; }
-        public static SpriteBatch SpriteBatchDOIS { get; set; }
+        public static SpriteBatch SpriteBatchUM { get; set; } //player
+        public static SpriteBatch SpriteBatchDOIS { get; set; } //resto
 
         public static int ScreenHeight;
         public static int ScreenWidth;
 
-        public static Vector2 startPoint = new(400,100);
+        public static Point Bounds { get; set; }
 
 
         //Inicializa direções usadas no codigo
@@ -38,6 +38,11 @@ namespace ProjetoJogo
 
 
         // Atualiza o valor da propriedade TotalSeconds com base no tempo decorrido desde o último frame
+ 
+        public static Vector2 GetStartPosition()
+        {
+            return new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2);
+        }
         public static void Update(GameTime gt)
         {
             Time = (float)gt.ElapsedGameTime.TotalSeconds;

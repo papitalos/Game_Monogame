@@ -13,11 +13,14 @@ namespace ProjetoJogo.Models.Rastro
     {
         private readonly Texture2D _texture;
         private readonly List<TrailPart> _trail;
+        private readonly Vector2 _position;
+    
         private readonly TrailStrategy _strategy;
         private const float LIFESPAN = 0.6f;
 
         public Trail(Texture2D tex, Vector2 position)
         {
+            _position = position;
             _texture = tex;
             _trail = new();
             _strategy = new TrailStrategyTime(position);
@@ -25,7 +28,7 @@ namespace ProjetoJogo.Models.Rastro
 
         private void AddTrail(Vector2 position, float rotation)
         {
-            _trail.Add(new(_texture, position, rotation, LIFESPAN));
+            _trail.Add(new(_texture, position ,rotation, LIFESPAN));
         }
 
         public void Update(Vector2 position)

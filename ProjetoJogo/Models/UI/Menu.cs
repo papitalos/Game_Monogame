@@ -10,26 +10,27 @@ using Microsoft.Xna.Framework.Input;
 using static ProjetoJogo.Game1;
 using System.Diagnostics;
 using System.Threading.Tasks.Dataflow;
+using ProjetoJogo.Managers;
 
-namespace ProjetoJogo.Managers
+namespace ProjetoJogo.Models.UI
 {
     public class Menu
     {
         public bool once = false;
         public Texture2D _backgroundTexture;
-        
-        Vector2 _backgroundScale = new (0.82f, 0.55f);
+
+        Vector2 _backgroundScale = new(0.82f, 0.55f);
         SpriteFont font;
-       
+
         private const float fontSize = 32f;
 
         public Menu()
         {
-            
-            _backgroundTexture = Globals.Content.Load<Texture2D>("mushroom");  
+
+            _backgroundTexture = Globals.Content.Load<Texture2D>("mushroom");
 
             font = Globals.Content.Load<SpriteFont>("default");
-            
+
         }
 
         public void Update()
@@ -38,11 +39,11 @@ namespace ProjetoJogo.Managers
             {
                 switch (InputManager.selectedOption)
                 {
-              
+
                     case 1://Jogar
                         GameManager.state = GameManager.GameState.Playing;
                         Debug.WriteLine("Iniciando game");
-                                            
+
                         break;
                     case 2://Sair
                         GameManager.state = GameManager.GameState.Quitting;
@@ -52,16 +53,16 @@ namespace ProjetoJogo.Managers
                         break;
                 }
             }
-                
+
         }
-       
+
         public void Draw()
         {
 
-            
+
             ScaleTexture(_backgroundTexture);
-            
-            
+
+
             // Define a escala da fonte
             float scale = fontSize / font.MeasureString("A").Y;
 
@@ -87,20 +88,20 @@ namespace ProjetoJogo.Managers
         private void ScaleTexture(Texture2D source)
         {
 
-            int newWidth = (int)(source.Width* _backgroundScale.X);
+            int newWidth = (int)(source.Width * _backgroundScale.X);
             int newHeight = (int)(source.Height * _backgroundScale.Y);
-            
+
 
             RenderTarget2D result = new RenderTarget2D(Instance.GraphicsDevice, newWidth, newHeight);
             Instance.GraphicsDevice.SetRenderTarget(result);
             Instance.GraphicsDevice.Clear(Color.Transparent);
 
             Globals.SpriteBatchDOIS.Draw(source, new Rectangle(0, 0, newWidth, newHeight), Color.White);
-            
+
 
             Instance.GraphicsDevice.SetRenderTarget(null);
-            
-           
+
+
         }
     }
 
