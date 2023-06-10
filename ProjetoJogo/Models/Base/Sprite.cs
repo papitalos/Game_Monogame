@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace ProjetoJogo.Models.Base
 {
@@ -16,6 +17,8 @@ namespace ProjetoJogo.Models.Base
         public Vector2 Position { get; protected set; }
         public float Rotation { get; protected set; }
         public float RotationSpeed { get; protected set; }
+        public float Scale { get; set; }
+
 
         public Vector2 Origin;
         protected Color color;
@@ -27,6 +30,15 @@ namespace ProjetoJogo.Models.Base
         public Rectangle _Rectangle;
         public Texture2D _RectangleTexture;
         public bool ShowRectangle { get; set; }
+
+        public Sprite(Texture2D tex, Vector2 pos)
+        {
+            texture = tex;
+            Position = pos;
+            Origin = new(tex.Width / 2, tex.Height / 2);
+            Scale = 1f;
+            color = Color.White;
+        }
 
         public Sprite(Texture2D texture, Vector2 position, float rotation)
         {

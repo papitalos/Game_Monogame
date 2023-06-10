@@ -3,7 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ProjetoJogo.Managers;
 using ProjetoJogo.Models;
+using ProjetoJogo.Models.Enemy;
 using ProjetoJogo.Models.Jogador;
+using System.Collections.Generic;
 
 namespace ProjetoJogo
 {
@@ -28,8 +30,6 @@ namespace ProjetoJogo
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-           
 
             _graphics.PreferredBackBufferWidth = 1600;
             _graphics.PreferredBackBufferHeight = 900;
@@ -62,8 +62,7 @@ namespace ProjetoJogo
         protected override void Update(GameTime gameTime)
         {
 
-         
-             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
 
             // TODO: Add your update logic here
 
@@ -77,7 +76,7 @@ namespace ProjetoJogo
 
         protected override void Draw(GameTime gameTime)
         {
-      
+
             GraphicsDevice.Clear(Color.Lerp(Color.MediumPurple, Color.Black, 0.75f));
 
             // TODO: Add your drawing code here
