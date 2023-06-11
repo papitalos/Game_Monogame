@@ -53,7 +53,7 @@ namespace ProjetoJogo.Models.Jogador
 
         public void Update()
         {
-            
+
             if (!_active) return;
 
             _frameTimeLeft -= Globals.Time;
@@ -71,4 +71,3 @@ namespace ProjetoJogo.Models.Jogador
         }
     }
 }
-

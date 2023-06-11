@@ -27,18 +27,12 @@ namespace ProjetoJogo.Models.Base
       
         public readonly AnimationManager _anims = new();
 
+        
         public Rectangle _Rectangle;
         public Texture2D _RectangleTexture;
         public bool ShowRectangle { get; set; }
 
-        public Sprite(Texture2D tex, Vector2 pos)
-        {
-            texture = tex;
-            Position = pos;
-            Origin = new(tex.Width / 2, tex.Height / 2);
-            Scale = 1f;
-            color = Color.White;
-        }
+
 
         public Sprite(Texture2D texture, Vector2 position, float rotation)
         {
@@ -115,7 +109,7 @@ namespace ProjetoJogo.Models.Base
                 if (_RectangleTexture != null)
                     Globals.SpriteBatchUM.Draw(_RectangleTexture, _Rectangle, Color.Red);
             }
-         
+
         }
 
 

@@ -24,8 +24,8 @@ namespace ProjetoJogo.Managers
 
             for (int i = 0; i < player.Weapon.Ammo; i++)
             {
-                Vector2 pos = new(0, i * _bulletTexture.Height * 2);
-                Globals.SpriteBatchUM.Draw(_bulletTexture, pos, null, c * 0.75f, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
+                Vector2 pos = new(i * _bulletTexture.Width * 1f,0);
+                Globals.SpriteBatchDOIS.Draw(_bulletTexture, pos, null, c * 0.75f, 0, Vector2.Zero, 1.2f, SpriteEffects.None, 1);
             }
         }
     }

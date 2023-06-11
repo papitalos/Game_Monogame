@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ProjetoJogo.Models.Jogador
 {
@@ -20,32 +21,33 @@ namespace ProjetoJogo.Models.Jogador
         public Vector2 _trailPosition = new(100, 100);
         public float Speed;
 
-
-       
+        int frameX, frameY;
 
         public Player(PlayerData data) : base(data.Texture, data.Position, data.Rotation)
         {
             isRot = false;
+            ShowRectangle = true;
 
             Speed = data.Speed;
             this.data = data;
 
-           
-            //Animações
-            //Walk
-            _anims.AddAnimation(Globals.back, new(data.Texture, 4, 5, 0.07f, 2));
-            _anims.AddAnimation(Globals.foward, new(data.Texture, 4, 5, 0.07f, 3));
-            
-            _anims.AddAnimation(Globals.down, new (data.Texture, 4, 5, 0.07f, 4));
-            _anims.AddAnimation(Globals.back_down, new(data.Texture, 4, 5, 0.07f, 4));
-            _anims.AddAnimation(Globals.foward_down, new(data.Texture, 4, 5, 0.07f, 4));
-            _anims.AddAnimation(Globals.up, new(data.Texture, 4, 5, 0.07f, 5));
-            _anims.AddAnimation(Globals.back_up, new(data.Texture, 4, 5, 0.07f, 5));
-            _anims.AddAnimation(Globals.foward_up, new(data.Texture, 4, 5, 0.07f, 5));
+            //Tamanho do Spritesheet
+            frameX = 4;
+            frameY = 5;
 
+
+            //Animations
+            //Walk
+            _anims.AddAnimation(Globals.back, new(data.Texture, frameX, frameY, 0.07f, 2));
+            _anims.AddAnimation(Globals.foward, new(data.Texture, frameX, frameY, 0.07f, 3));
+            _anims.AddAnimation(Globals.down, new(data.Texture, frameX, frameY, 0.07f, 4));
+            _anims.AddAnimation(Globals.back_down, new(data.Texture, frameX, frameY, 0.07f, 4));
+            _anims.AddAnimation(Globals.foward_down, new(data.Texture, frameX, frameY, 0.07f, 4));
+            _anims.AddAnimation(Globals.up, new(data.Texture, frameX, frameY, 0.07f, 5));
+            _anims.AddAnimation(Globals.back_up, new(data.Texture, frameX, frameY, 0.07f, 5));
+            _anims.AddAnimation(Globals.foward_up, new(data.Texture, frameX, frameY, 0.07f, 5));
             //Idle
-            _anims.AddAnimation(Globals.stoped, new(data.Texture, 4, 5, 0.4f, 1));
-            
+            _anims.AddAnimation(Globals.stoped, new(data.Texture, frameX, frameY, 0.3f, 1));
 
             //Trail do Player
             trail = new(Globals.Content.Load<Texture2D>("trail"), _trailPosition);
@@ -102,6 +104,12 @@ namespace ProjetoJogo.Models.Jogador
             data.Weapon.Draw();
             _anims.Draw(Position);
             trail.Draw();
+            //DEBUG
+            if (InputManager.KeyboardF1 && !ShowRectangle)
+            {
+                if (_RectangleTexture != null)
+                    Globals.SpriteBatchUM.Draw(_RectangleTexture, _Rectangle, Color.Red);
+            }
         }
 
     }

@@ -62,9 +62,9 @@ namespace ProjetoJogo.Models.Weapons
             // Calcular a posição ajustada da arma em relação ao mouse usando a matriz de transformação da câmera
             Matrix inverseTransform = Matrix.Invert(Camera.Transform);
             Vector2 mousePosition = Vector2.Transform(InputManager.MousePosition, inverseTransform);
-            Vector2 adjustedPosition = new Vector2(Position.X - mousePosition.X, Position.Y - mousePosition.Y);
-            Rotation = (float)Math.Atan2(mousePosition.Y - adjustedPosition.Y, mousePosition.X - adjustedPosition.X);
 
+
+            Rotation = (float)Math.Atan2(mousePosition.Y - Position.Y, mousePosition.X - Position.X);
             Position = new Vector2(pos.X + 16f, pos.Y +  18f);
 
 

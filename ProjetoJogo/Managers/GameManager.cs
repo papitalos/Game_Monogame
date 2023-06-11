@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ProjetoJogo.Models.Enemy;
 using ProjetoJogo.Models.Jogador;
 using ProjetoJogo.Models.Rastro;
 using ProjetoJogo.Models.UI;
@@ -50,13 +51,14 @@ namespace ProjetoJogo.Managers
             playerData = new PlayerData();
             player = new Player(playerData);
 
-            
+            EnemyManager.Init();
 
 
         }
         public void Restart()
         {
             BulletManager.Reset();
+            EnemyManager.Reset();
             player.Reset();
         }
         public void Update()
@@ -73,8 +75,8 @@ namespace ProjetoJogo.Managers
             {
                 player.Update();
                 Camera.Follow(player);
-               
 
+                EnemyManager.Update(player);
                 BulletManager.Update();
             }
 
@@ -90,6 +92,7 @@ namespace ProjetoJogo.Managers
             {
                 BulletManager.Draw();
                 player.Draw();
+                EnemyManager.Draw();
                 UIManager.Draw(playerData);
 
             }

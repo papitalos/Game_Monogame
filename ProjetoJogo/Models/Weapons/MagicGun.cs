@@ -16,7 +16,7 @@ namespace ProjetoJogo.Models.Weapons
         public MagicGun(Texture2D texture, Vector2 position, float rot) : base(texture, position, rot)
         {
             cooldown = 0.1f;
-            maxAmmo = 30;
+            maxAmmo = 13;
             Ammo = maxAmmo;
             reloadTime = 2f;
         }

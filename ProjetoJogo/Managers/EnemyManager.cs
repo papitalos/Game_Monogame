@@ -13,7 +13,7 @@ namespace ProjetoJogo.Models.Enemy
 
     public static class EnemyManager
     {
-        public static List<Enemy> Zombies { get; } = new();
+        public static List<Enemy> Enemys { get; } = new();
         private static Texture2D _texture;
         private static float _spawnCooldown;
         private static float _spawnTime;
@@ -22,8 +22,8 @@ namespace ProjetoJogo.Models.Enemy
 
         public static void Init()
         {
-            _texture = Globals.Content.Load<Texture2D>("player");
-            _spawnCooldown = 0.33f;
+            _texture = Globals.Content.Load<Texture2D>("enemy");
+            _spawnCooldown = 2f;
             _spawnTime = _spawnCooldown;
             _random = new();
             _padding = _texture.Width / 2;
@@ -31,7 +31,7 @@ namespace ProjetoJogo.Models.Enemy
 
         public static void Reset()
         {
-            Zombies.Clear();
+            Enemys.Clear();
             _spawnTime = _spawnCooldown;
         }
 
@@ -57,7 +57,7 @@ namespace ProjetoJogo.Models.Enemy
 
         public static void AddZombie()
         {
-            Zombies.Add(new(_texture, RandomPosition()));
+            Enemys.Add(new(_texture, RandomPosition()));
         }
 
         public static void Update(Player player)
@@ -69,16 +69,16 @@ namespace ProjetoJogo.Models.Enemy
                 AddZombie();
             }
 
-            foreach (var z in Zombies)
+            foreach (var z in Enemys)
             {
                 z.Update(player);
             }
-            Zombies.RemoveAll((z) => z.HP <= 0);
+            Enemys.RemoveAll((z) => z.HP <= 0);
         }
 
         public static void Draw()
         {
-            foreach (var z in Zombies)
+            foreach (var z in Enemys)
             {
                 z.Draw();
             }

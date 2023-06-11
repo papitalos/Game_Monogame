@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProjetoJogo.Models.Jogador;
 
 namespace ProjetoJogo
 {
@@ -22,7 +23,6 @@ namespace ProjetoJogo
         public static int ScreenWidth;
 
         public static Point Bounds { get; set; }
-
 
         //Inicializa direções usadas no codigo
         public static Vector2 stoped = new Vector2(0, 0); //parado
