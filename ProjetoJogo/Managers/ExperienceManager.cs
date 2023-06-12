@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-/*
+using ProjetoJogo.Models;
+
 namespace ProjetoJogo.Managers
 {
 
@@ -23,8 +24,8 @@ namespace ProjetoJogo.Managers
         public static void Init(Texture2D tex)
         {
             _texture = tex;
-            _font = Globals.Content.Load<SpriteFont>("font");
-            _position = new(Globals.Bounds.X - (2 * _texture.Width), 0);
+            _font = Globals.Content.Load<SpriteFont>("default");
+            _position = new(-8, 40);
         }
 
         public static void Reset()
@@ -37,7 +38,7 @@ namespace ProjetoJogo.Managers
             Experience.Add(new(_texture, pos));
         }
 
-        public static void Update(Player player)
+        public static void Update(Player player,PlayerData playerData)
         {
             foreach (var e in Experience)
             {
@@ -52,15 +53,15 @@ namespace ProjetoJogo.Managers
 
             Experience.RemoveAll((e) => e.Lifespan <= 0);
 
-            _playerExp = player.Experience.ToString();
+            _playerExp = playerData.Experience.ToString();
             var x = _font.MeasureString(_playerExp).X / 2;
-            _textPosition = new(Globals.Bounds.X - x - 32, 14);
+            _textPosition = new(18, 45);
         }
 
         public static void Draw()
         {
-            Globals.SpriteBatch.Draw(_texture, _position, null, Color.White * 0.75f, 0f, Vector2.Zero, 2f, SpriteEffects.None, 1f);
-            Globals.SpriteBatch.DrawString(_font, _playerExp, _textPosition, Color.White);
+            Globals.SpriteBatchDOIS.Draw(_texture, _position, null, Color.White * 0.75f, 0f, Vector2.Zero, 2f, SpriteEffects.None, 1f);
+            Globals.SpriteBatchDOIS.DrawString(_font, _playerExp, _textPosition, Color.White);
 
             foreach (var e in Experience)
             {
@@ -68,4 +69,4 @@ namespace ProjetoJogo.Managers
             }
         }
     }
-}*/
+}

@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using ProjetoJogo.Models.Inimigos;
 
-namespace ProjetoJogo.Models.Enemy
+namespace ProjetoJogo.Managers
 {
 
     public static class EnemyManager
@@ -23,7 +24,7 @@ namespace ProjetoJogo.Models.Enemy
         public static void Init()
         {
             _texture = Globals.Content.Load<Texture2D>("enemy");
-            _spawnCooldown = 2f;
+            _spawnCooldown = 1.2f;
             _spawnTime = _spawnCooldown;
             _random = new();
             _padding = _texture.Width / 2;
@@ -80,6 +81,7 @@ namespace ProjetoJogo.Models.Enemy
         {
             foreach (var z in Enemys)
             {
+                z.Show();
                 z.Draw();
             }
         }

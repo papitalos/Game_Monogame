@@ -21,7 +21,8 @@ namespace ProjetoJogo.Models.Jogador
         public Texture2D _weapon1_tex;
 
 
-        public bool Dead; 
+        public bool Dead;
+        public int Experience;
         public PlayerData()
         {
 

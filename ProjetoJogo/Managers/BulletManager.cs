@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using ProjetoJogo.Models.Inimigos;
 using ProjetoJogo.Models.Weapons;
 using System;
 using System.Collections.Generic;
@@ -28,12 +29,21 @@ namespace ProjetoJogo.Managers
             Bullets.Add(new(_texture, data));
         }
 
-        public static void Update()
+        public static void Update(List<Enemy> enemys)
         {
             foreach (var p in Bullets)
             {
                 p.Update();
-               
+                foreach (var z in enemys)
+                {
+                    if (z.HP <= 0) continue;
+                    if ((p.Position - z.Position).Length() < 32)
+                    {
+                        z.TakeDamage(p.Damage);
+                        p.Destroy();
+                        break;
+                    }
+                }
             }
             Bullets.RemoveAll((p) => p.Lifespan <= 0);
         }

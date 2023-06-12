@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ProjetoJogo.Models.Enemy;
 using ProjetoJogo.Models.Jogador;
 using ProjetoJogo.Models.Rastro;
 using ProjetoJogo.Models.UI;
 using ProjetoJogo.Models.Weapons;
+using ProjetoJogo.Managers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -41,7 +41,7 @@ namespace ProjetoJogo.Managers
          
 
             var bullet_tex = Globals.Content.Load<Texture2D>("bullet");
-          
+            ExperienceManager.Init(Globals.Content.Load<Texture2D>("exp"));
 
             BulletManager.Init(bullet_tex);
             UIManager.Init(bullet_tex);
@@ -59,6 +59,7 @@ namespace ProjetoJogo.Managers
         {
             BulletManager.Reset();
             EnemyManager.Reset();
+            ExperienceManager.Reset();
             player.Reset();
         }
         public void Update()
@@ -73,11 +74,11 @@ namespace ProjetoJogo.Managers
             }
             if (state == GameState.Playing)
             {
-                player.Update();
+                player.Update(EnemyManager.Enemys);
                 Camera.Follow(player);
-
+                ExperienceManager.Update(player,playerData);
                 EnemyManager.Update(player);
-                BulletManager.Update();
+                BulletManager.Update(EnemyManager.Enemys);
             }
 
         }
@@ -90,7 +91,9 @@ namespace ProjetoJogo.Managers
             }
             if (state == GameState.Playing)
             {
+                ExperienceManager.Draw();
                 BulletManager.Draw();
+                player.Show();
                 player.Draw();
                 EnemyManager.Draw();
                 UIManager.Draw(playerData);

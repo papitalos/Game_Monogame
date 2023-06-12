@@ -1,15 +1,16 @@
-﻿using Microsoft.Xna.Framework;
+﻿using global::ProjetoJogo.Models.Base;
+using global::ProjetoJogo.Models.Jogador;
+using global::ProjetoJogo.Models.Rastro;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ProjetoJogo.Managers;
-using ProjetoJogo.Models.Base;
-using ProjetoJogo.Models.Jogador;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjetoJogo.Models.Enemy
+namespace ProjetoJogo.Models.Inimigos
 {
     public class Enemy : AnimatedSprite
     {
@@ -18,13 +19,16 @@ namespace ProjetoJogo.Models.Enemy
         private Vector2 _direction;
 
         int frameX, frameY;
+
+        private readonly Trail trail;
+        public Vector2 _trailPosition = new(100, 100);
         public Enemy(Texture2D tex, Vector2 pos) : base(tex, pos, 0)
         {
             Speed = 100;
-            HP = 2;
+            HP = 1;
 
             //Tamanho do Spritesheet
-            frameX = 4; 
+            frameX = 4;
             frameY = 5;
 
             //Animations
@@ -38,15 +42,20 @@ namespace ProjetoJogo.Models.Enemy
             _anims.AddAnimation(Globals.back_up, new(tex, frameX, frameY, 0.07f, 5));
             _anims.AddAnimation(Globals.foward_up, new(tex, frameX, frameY, 0.07f, 5));
             //Idle
-            _anims.AddAnimation(Globals.stoped, new(tex, frameX, frameY, 0.3f, 1)); 
-        }   
+            _anims.AddAnimation(Globals.stoped, new(tex, frameX, frameY, 0.3f, 1));
+
+            //Trail do Enemy
+            trail = new(Globals.Content.Load<Texture2D>("trailEN"), _trailPosition);
+        }
 
         public void TakeDamage(int dmg)
         {
             HP -= dmg;
+            if (HP <= 0) ExperienceManager.AddExperience(Position);
         }
 
         public void Update(Player player)
+
         {
             UpdateInfo();
 
@@ -69,19 +78,18 @@ namespace ProjetoJogo.Models.Enemy
             {
                 var dir = Vector2.Normalize(toPlayer);
                 Position += dir * Speed * Globals.Time;
+                _trailPosition = new Vector2(Position.X + 16, Position.Y + 17);
             }
+            trail.Update(_trailPosition);
+
         }
 
-        public new void Draw()
+        public void Show()
         {
-            _anims.Draw(Position);
-            //DEBUG
-            if (InputManager.KeyboardF1 && !ShowRectangle)
-            {
-                if (_RectangleTexture != null)
-                    Globals.SpriteBatchUM.Draw(_RectangleTexture, _Rectangle, Color.Red);
-            }
+            trail.Draw();
         }
 
     }
 }
+
+

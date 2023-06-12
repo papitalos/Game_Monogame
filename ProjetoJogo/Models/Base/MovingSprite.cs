@@ -16,7 +16,6 @@ namespace ProjetoJogo.Models.Base
         public MovingSprite(Texture2D tex, Vector2 pos, float rot) : base(tex, pos, rot)
         {
             Speed = 300;
-            isAnimated = false;
         }
     }
 }

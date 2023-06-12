@@ -12,7 +12,7 @@ namespace ProjetoJogo.Models.Jogador
     {
         public static Matrix Transform { get; private set; }
 
-        public static void Follow(Sprite target)
+        public static void Follow(Player target)
         {
             var offset = Matrix.CreateTranslation(Globals.ScreenWidth / 2, Globals.ScreenHeight / 2, 0);
 

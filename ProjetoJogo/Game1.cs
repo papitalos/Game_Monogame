@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ProjetoJogo.Managers;
 using ProjetoJogo.Models;
-using ProjetoJogo.Models.Enemy;
 using ProjetoJogo.Models.Jogador;
 using System.Collections.Generic;
 

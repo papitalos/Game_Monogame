@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
 using Microsoft.Xna.Framework;
-/*
+
 namespace ProjetoJogo.Models
 {
 
@@ -17,7 +17,7 @@ namespace ProjetoJogo.Models
         public float Lifespan { get; private set; }
         private const float LIFE = 5f;
 
-        public Experience(Texture2D tex, Vector2 pos) : base(tex, pos)
+        public Experience(Texture2D tex, Vector2 pos) : base(tex, pos, 0)
         {
             Lifespan = LIFE;
         }
@@ -34,4 +34,3 @@ namespace ProjetoJogo.Models
         }
     }
 }
-*/

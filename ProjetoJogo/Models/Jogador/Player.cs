@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ProjetoJogo.Managers;
 using ProjetoJogo.Models.Base;
+using ProjetoJogo.Models.Inimigos;
 using ProjetoJogo.Models.Rastro;
 using ProjetoJogo.Models.Weapons;
 using System;
@@ -64,6 +65,10 @@ namespace ProjetoJogo.Models.Jogador
             data.Position = Globals.GetStartPosition();
            
         }
+        public void GetExperience(int exp)
+        {
+            data.Experience += exp;
+        }
         private void Walk()
         {
             if (InputManager.Moving)
@@ -74,8 +79,19 @@ namespace ProjetoJogo.Models.Jogador
             }
 
         }
-
-        public void Update()
+        private void CheckDeath(List<Enemy> enemys)
+        {
+            foreach (var z in enemys)
+            {
+                if (z.HP <= 0) continue;
+                if ((Position - z.Position).Length() < 50)
+                {
+                    data.Dead = true;
+                    break;
+                }
+            }
+        }
+        public void Update(List<Enemy> enemys)
         {
             UpdateInfo();
 
@@ -97,19 +113,13 @@ namespace ProjetoJogo.Models.Jogador
             }
 
             
+            CheckDeath(enemys);
         }
 
-        public new void Draw()
+        public void Show()
         {
             data.Weapon.Draw();
-            _anims.Draw(Position);
             trail.Draw();
-            //DEBUG
-            if (InputManager.KeyboardF1 && !ShowRectangle)
-            {
-                if (_RectangleTexture != null)
-                    Globals.SpriteBatchUM.Draw(_RectangleTexture, _Rectangle, Color.Red);
-            }
         }
 
     }
