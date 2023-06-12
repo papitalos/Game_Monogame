@@ -55,7 +55,6 @@ namespace ProjetoJogo
 
         protected override void LoadContent()
         {
-            Song musicaFundo = Content.Load<Song>("bump");
             _spriteBatchUM = new SpriteBatch(GraphicsDevice);
             _spriteBatchDOIS = new SpriteBatch(GraphicsDevice);
 

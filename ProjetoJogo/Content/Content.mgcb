@@ -68,6 +68,12 @@
 /processorParam:Quality=Best
 /build:Fluffing-a-Duck.mp3
 
+#begin GunSFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GunSFX.wav
+
 #begin hands.png
 /importer:TextureImporter
 /processor:TextureProcessor
