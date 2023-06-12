@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using ProjetoJogo.Managers;
 using ProjetoJogo.Models;
 using ProjetoJogo.Models.Jogador;
@@ -15,7 +17,9 @@ namespace ProjetoJogo
         public SpriteBatch _spriteBatchUM;
         public SpriteBatch _spriteBatchDOIS;
         private GameManager _gameManager;
-   
+        public Song musicaFundo;
+
+
 
         public Game1()
         {
@@ -33,6 +37,9 @@ namespace ProjetoJogo
             _graphics.PreferredBackBufferWidth = 1600;
             _graphics.PreferredBackBufferHeight = 900;
 
+            
+
+
             Globals.ScreenHeight = _graphics.PreferredBackBufferHeight;
             Globals.ScreenWidth = _graphics.PreferredBackBufferWidth;
 
@@ -48,7 +55,7 @@ namespace ProjetoJogo
 
         protected override void LoadContent()
         {
-
+            Song musicaFundo = Content.Load<Song>("bump");
             _spriteBatchUM = new SpriteBatch(GraphicsDevice);
             _spriteBatchDOIS = new SpriteBatch(GraphicsDevice);
 
@@ -60,12 +67,19 @@ namespace ProjetoJogo
 
         protected override void Update(GameTime gameTime)
         {
+            if (musicaFundo == null)
+            {
+                musicaFundo = Content.Load<Song>("Fluffing-a-Duck");
+                MediaPlayer.IsRepeating = true;
+                MediaPlayer.Play(musicaFundo);
+            }
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
 
             // TODO: Add your update logic here
 
             Globals.Update(gameTime);
+
 
             _gameManager.Update();
                     

@@ -25,6 +25,12 @@
 /processorParam:TextureFormat=Color
 /build:bullet.png
 
+#begin bump.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:bump.mp3
+
 #begin default.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -55,6 +61,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:exp.png
+
+#begin Fluffing-a-Duck.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Fluffing-a-Duck.mp3
 
 #begin hands.png
 /importer:TextureImporter
