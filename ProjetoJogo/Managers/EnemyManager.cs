@@ -36,29 +36,25 @@ namespace ProjetoJogo.Managers
             _spawnTime = _spawnCooldown;
         }
 
-        private static Vector2 RandomPosition()
+        private static Vector2 RandomPosition(Vector2 playerPosition, float minRadius, float maxRadius)
         {
-            float w = Globals.Bounds.X;
-            float h = Globals.Bounds.Y;
-            Vector2 pos = new();
+            // Gera um ângulo aleatório
+            double angle = _random.NextDouble() * Math.PI * 2;
 
-            if (_random.NextDouble() < w / (w + h))
-            {
-                pos.X = (int)(_random.NextDouble() * w);
-                pos.Y = (int)(_random.NextDouble() < 0.5 ? -_padding : h + _padding);
-            }
-            else
-            {
-                pos.Y = (int)(_random.NextDouble() * h);
-                pos.X = (int)(_random.NextDouble() < 0.5 ? -_padding : w + _padding);
-            }
+            // Gera um raio aleatório entre minRadius e maxRadius
+            double radius = minRadius + (_random.NextDouble() * (maxRadius - minRadius));
+
+            // Calcula a posição do inimigo com base no ângulo e raio
+            Vector2 pos = new();
+            pos.X = playerPosition.X + (float)(Math.Cos(angle) * radius);
+            pos.Y = playerPosition.Y + (float)(Math.Sin(angle) * radius);
 
             return pos;
         }
 
-        public static void AddZombie()
+        public static void AddEnemy(Player player)
         {
-            Enemys.Add(new(_texture, RandomPosition()));
+            Enemys.Add(new(_texture, RandomPosition(player.Position, 150f, 450f)));
         }
 
         public static void Update(Player player)
@@ -67,7 +63,7 @@ namespace ProjetoJogo.Managers
             while (_spawnTime <= 0)
             {
                 _spawnTime += _spawnCooldown;
-                AddZombie();
+                AddEnemy(player);
             }
 
             foreach (var z in Enemys)
