@@ -1,4 +1,5 @@
-[English]
+------------------------------------------------------ [English] ------------------------------------------------------
+
 Game developed by:
 
 Gabriel Rodrigues;
@@ -55,7 +56,8 @@ In the brainstorming process, we gathered the team to discuss ideas and concepts
 
 The idea of having an alien as the protagonist, leaving a trail while moving, emerged during these discussions. We also considered including a shotgun with multiple firing angles to add variety and strategy to the combat. The choice of enemies similar to the main character but red was made to create an interesting visual contrast.
 
-[Portuguese]
+------------------------------------------------------ [Portuguese] ------------------------------------------------------
+
 Game desenvolvido por:
 
 Gabriel Rodrigues;
